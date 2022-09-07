@@ -25,6 +25,7 @@ def create_todolist(request):
         form = TodoListForm(request.POST)
         if form.is_valid():
             form.save()
+            # TODO make it so form can't be submitted if empty!!
         return redirect("todo_list_list")
     else:
         form = TodoListForm()
@@ -34,3 +35,21 @@ def create_todolist(request):
     }
 
     return render(request, "todos/create.html", context)
+
+
+def edit_todolist(request, pk):
+    todolist_instance = TodoList.objects.get(pk=pk)
+    if request.method == "POST":
+        form = TodoListForm(request.POST, instance=todolist_instance)
+        if form.is_valid():
+            form.save()
+            # TODO make it so form can't be submitted if empty!!
+            return redirect("todo_list_detail", pk=pk)
+    else:
+        form = TodoListForm(instance=todolist_instance)
+
+    context = {
+        "form": form,
+    }
+
+    return render(request, "todos/edit.html", context)

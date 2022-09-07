@@ -4,6 +4,9 @@
 <main>
     <div>
         <h1>{{todolist_instance}}</h1>
+        <p>
+            <a href="{% url 'todo_list_edit' todolist_instance.id %}">Edit</a>
+        </p>
         <h2>Tasks</h2>
         <table>
             <thead>
