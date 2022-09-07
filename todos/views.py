@@ -53,3 +53,12 @@ def edit_todolist(request, pk):
     }
 
     return render(request, "todos/edit.html", context)
+
+
+def delete_todolist(request, pk):
+    todolist_instance = TodoList.objects.get(pk=pk)
+    if request.method == "POST":
+        todolist_instance.delete()
+        return redirect("todo_list_list")
+
+    return render(request, "todos/delete.html")
