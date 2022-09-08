@@ -11,4 +11,4 @@ class TodoListForm(forms.ModelForm):
 class TodoItemForm(forms.ModelForm):
     class Meta:
         model = TodoItem
-        fields = ["task"]
+        fields = ["task", "due_date", "is_completed", "list"]

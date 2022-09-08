@@ -6,7 +6,8 @@
         <h1>Create a new item</h1>
         <form method="POST">
             {% csrf_token %}
-            <p><label>Task:</label>
+            {{ form.as_p }}
+            <!-- <p><label>Task:</label>
                 <input type="text" name="task" required>
             </p>
             <p>
@@ -18,11 +19,11 @@
             </p>
             <p><label>List:</label>
                 <select name="list">
-                    {% for i in todolist_list %} -->
+                    {% for i in todolist_list %}
                     <option value="{{ i.name }}">{{ i.name }}</option>
                     {% endfor %}
                 </select>
-            </p>
+            </p> -->
             <div>
                 <p><button>Submit</button></p>
             </div>

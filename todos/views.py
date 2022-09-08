@@ -65,39 +65,43 @@ def delete_todolist(request, pk):
 
 
 def create_todoitem(request):
-    todolist_list = TodoList.objects.all()
     if request.method == "POST":
         form = TodoItemForm(request.POST)
         if form.is_valid():
-            form.save()
+            entry = form.save(commit=False)
+            list_name = form.cleaned_data["list"]
+            list_id = TodoList.objects.get(name=list_name).id
+            entry.list_id = list_id
+            entry.save()
             # TODO make it so form can't be submitted if empty!!
-        return redirect("todo_list_detail")
+        return redirect("todo_list_detail", pk=list_id)
     else:
         form = TodoItemForm()
 
     context = {
         "form": form,
-        "todolist_list": todolist_list,
     }
 
     return render(request, "items/create.html", context)
 
 
 def edit_todoitem(request, pk):
-    todolist_list = TodoList.objects.all()
     todoitem_instance = TodoItem.objects.get(pk=pk)
     if request.method == "POST":
         form = TodoItemForm(request.POST, instance=todoitem_instance)
         if form.is_valid():
-            form.save()
+            entry = form.save(commit=False)
+            list_name = form.cleaned_data["list"]
+            list_id = TodoList.objects.get(name=list_name).id
+            entry.list_id = list_id
+            entry.save()
             # TODO make it so form can't be submitted if empty!!
-            return redirect("todo_list_edit", pk=pk)
+            return redirect("todo_list_detail", pk=list_id)
     else:
-        form = TodoListForm(instance=todoitem_instance)
+        form = TodoItemForm(instance=todoitem_instance)
 
     context = {
         "form": form,
-        "todolist_list": todolist_list,
     }
 
     return render(request, "items/edit.html", context)

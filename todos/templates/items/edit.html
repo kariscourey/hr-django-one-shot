@@ -3,11 +3,11 @@
 {% block content %}
 <main>
     <div>
-        <h1>Edit {{ todoitem_instance }}</h1>
+        <h1>Edit {{ form.task.value }}</h1>
         <form method="POST">
             {% csrf_token %}
             {{form.as_p}}
-            <p><label>Task:</label>
+            <!-- <p><label>Task:</label>
                 <input type="text" name="task" required>
             </p>
             <p>
@@ -23,7 +23,7 @@
                     <option value="{{ i.name }}">{{ i.name }}</option>
                     {% endfor %}
                 </select>
-            </p>
+            </p> -->
             <div>
                 <p><button>Submit</button></p>
             </div>
