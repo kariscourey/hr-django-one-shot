@@ -12,3 +12,7 @@ class TodoItemForm(forms.ModelForm):
     class Meta:
         model = TodoItem
         fields = ["task", "due_date", "is_completed", "list"]
+
+    # def __init__(self, *args, **kwargs):
+    #     super(TodoItemForm, self).__init__(*args, **kwargs)
+    #     self.fields["due_date"].required = False

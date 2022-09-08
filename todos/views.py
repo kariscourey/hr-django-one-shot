@@ -24,9 +24,16 @@ def create_todolist(request):
     if request.method == "POST":
         form = TodoListForm(request.POST)
         if form.is_valid():
-            form.save()
+            entry = form.save(commit=False)
+            last = TodoList.objects.last()
+            if last:
+                list_id = last.id + 1
+            else:
+                list_id = 1
+            entry.id = list_id
+            entry.save()
             # TODO make it so form can't be submitted if empty!!
-        return redirect("todo_list_list")
+        return redirect("todo_list_detail", pk=list_id)
     else:
         form = TodoListForm()
 
