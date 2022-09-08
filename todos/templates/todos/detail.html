@@ -21,7 +21,7 @@
             <tbody>
                 {% for i in todolist_instance.items.all %}
                 <tr>
-                    <td>{{i}}</td>
+                    <td><a href="{% url 'todo_item_edit' i.id %}">{{ i }}</a></td>
                     <td>{{i.due_date}}</td>
                 </tr>
                 {% endfor %}

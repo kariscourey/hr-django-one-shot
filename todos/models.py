@@ -12,7 +12,7 @@ class TodoList(models.Model):
 class TodoItem(models.Model):
     task = models.CharField(max_length=100)
     due_date = models.DateTimeField(auto_now=False, null=True)
-    is_completed = models.BooleanField(default=False)
+    is_completed = models.BooleanField(default=False, null=True)
     list = models.ForeignKey("TodoList", related_name="items", on_delete=models.CASCADE)
 
     def __str__(self):

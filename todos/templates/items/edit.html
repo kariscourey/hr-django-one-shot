@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main>
+    <div>
+        <h1>Edit {{ todoitem_instance }}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <p><label>Task:</label>
+                <input type="text" name="task" required>
+            </p>
+            <p>
+                <label>Due date:</label>
+                <input type="text" name="due_date" required>
+            </p>
+            <p><label>Is completed:</label>
+                <input type="checkbox" name="is_completed">
+            </p>
+            <p><label>List:</label>
+                <select name="list">
+                    {% for i in todolist_list %}
+                    <option value="{{ i.name }}">{{ i.name }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+            <div>
+                <p><button>Submit</button></p>
+            </div>
+        </form>
+    </div>
+</main>
+{% endblock content %}
